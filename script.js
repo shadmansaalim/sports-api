@@ -15,8 +15,6 @@ const loadClubs = () => {
 const displayClubs = clubs => {
   document.getElementById('spinner').classList.add('d-none');
   document.getElementById('search-btn').classList.remove('d-none');
-  document.getElementById('search-container').classList.remove('search-center');
-
 
   const clubsContainer = document.getElementById('clubs-container');
   clubsContainer.textContent = '';
@@ -25,6 +23,7 @@ const displayClubs = clubs => {
     alert("Club doesn't exist. Please try searching a club that exists.")
   }
   else {
+    document.getElementById('search-container').classList.remove('search-center');
     for (club of (clubs.teams)) {
       const div = document.createElement('div');
       div.classList.add('col');
@@ -57,7 +56,8 @@ const readMore = clubId => {
 }
 
 const displayReadMore = club => {
-  const { strTeam, strLeague, strTeamBadge, strStadiumDescription, strCountry } = club.teams[0];
+  console.log(club);
+  const { strTeam, strLeague, strTeamBadge, strDescriptionEN, strCountry } = club.teams[0];
 
   document.getElementById('modal-header').innerHTML = `
      <div>
@@ -71,15 +71,9 @@ const displayReadMore = club => {
     <p>Country: ${strCountry}</p>
   `;
 
-  if (strStadiumDescription === null) {
-    document.getElementById('modal-body').innerHTML = `
+  document.getElementById('modal-body').innerHTML = `
      <img class="mx-auto" width="100px" src="${strTeamBadge}" alt="">
-    `;
-  }
-  else {
-    document.getElementById('modal-body').innerHTML = `
-     <img class="mx-auto" width="100px" src="${strTeamBadge}" alt="">
-     <p>${strStadiumDescription}</p>
-    `;
-  }
+     <p>${strDescriptionEN}</p>
+  `;
+
 }
