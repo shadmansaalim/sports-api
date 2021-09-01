@@ -13,18 +13,22 @@ const loadClubs = () => {
 }
 
 const displayClubs = clubs => {
+  document.getElementById('spinner').classList.add('d-none');
+  document.getElementById('search-btn').classList.remove('d-none');
+
   const clubsContainer = document.getElementById('clubs-container');
   clubsContainer.textContent = '';
 
-  if (clubs.teams == null) {
+  if (!clubs.teams) {
     alert("Club doesn't exist. Please try searching a club that exists.")
   }
-  else {
-    document.getElementById('search-container').classList.remove('search-center');
-    for (club of (clubs.teams)) {
-      const div = document.createElement('div');
-      div.classList.add('col');
-      div.innerHTML = `
+
+  document.getElementById('search-container').classList.remove('search-center');
+
+  clubs.teams?.forEach(club => {
+    const div = document.createElement('div');
+    div.classList.add('col');
+    div.innerHTML = `
     
                     <div class="card h-100 bg-dark text-white">
                       <img src="${club.strTeamBadge}" class="card-img-top" alt="...">
@@ -38,11 +42,8 @@ const displayClubs = clubs => {
                     </div>
   
       `
-      clubsContainer.appendChild(div);
-    }
-  }
-  document.getElementById('spinner').classList.add('d-none');
-  document.getElementById('search-btn').classList.remove('d-none');
+    clubsContainer.appendChild(div);
+  });
 
 }
 
