@@ -13,9 +13,6 @@ const loadClubs = () => {
 }
 
 const displayClubs = clubs => {
-  document.getElementById('spinner').classList.add('d-none');
-  document.getElementById('search-btn').classList.remove('d-none');
-
   const clubsContainer = document.getElementById('clubs-container');
   clubsContainer.textContent = '';
 
@@ -44,6 +41,8 @@ const displayClubs = clubs => {
       clubsContainer.appendChild(div);
     }
   }
+  document.getElementById('spinner').classList.add('d-none');
+  document.getElementById('search-btn').classList.remove('d-none');
 
 }
 
